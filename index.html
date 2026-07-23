@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Vaiga - Cozy Pineapple Cutter</title>
+    <meta name="description" content="A cozy, relaxing pineapple slicing game. Slice fresh tropical fruits, earn combos, and unwind with soothing audio and warm visuals.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Main Game Canvas Container -->
+    <div id="canvas-container">
+        <canvas id="game-canvas"></canvas>
+    </div>
+
+    <!-- UI Overlay Layer -->
+    <div id="ui-layer">
+        <!-- Start / Menu Overlay Screen -->
+        <div id="start-screen" class="overlay-screen">
+            <div class="cozy-card">
+                <div class="brand-title">
+                    <span class="tropical-icon">🍍</span>
+                    <h1>VAIGA</h1>
+                    <p class="tagline">COZY PINEAPPLE HARVEST</p>
+                </div>
+
+                <div class="mode-select-container">
+                    <button id="btn-mode-zen" class="cozy-btn btn-primary">
+                        <span class="btn-icon">🧘</span>
+                        <div class="btn-text">
+                            <span class="title">COZY ZEN MODE</span>
+                            <span class="desc">Relaxing slice & infinite fruits</span>
+                        </div>
+                    </button>
+
+                    <button id="btn-mode-timed" class="cozy-btn btn-secondary">
+                        <span class="btn-icon">⏳</span>
+                        <div class="btn-text">
+                            <span class="title">TIMED HARVEST</span>
+                            <span class="desc">60-second score challenge</span>
+                        </div>
+                    </button>
+                </div>
+
+                <div class="menu-bottom-row">
+                    <button id="btn-blade-select" class="cozy-btn btn-small">✨ Blade Trail</button>
+                    <button id="btn-sound-toggle" class="cozy-btn btn-small btn-icon-only" title="Toggle Sound">🔊</button>
+                </div>
+
+                <div class="high-score-badge">
+                    <span>BEST SCORE: </span>
+                    <span id="best-score-val">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- In-Game HUD Screen -->
+        <div id="game-hud" class="hud-overlay hidden">
+            <!-- Top HUD Bar -->
+            <div class="hud-header">
+                <div class="score-card">
+                    <span class="score-label">SCORE</span>
+                    <span id="current-score" class="score-value">0</span>
+                </div>
+
+                <div class="timer-card hidden" id="timer-container">
+                    <span class="timer-label">TIME</span>
+                    <span id="timer-val" class="timer-value">60</span>
+                </div>
+
+                <div class="hud-actions">
+                    <button id="btn-pause" class="hud-btn" title="Pause Game">⏸️</button>
+                    <button id="btn-hud-sound" class="hud-btn" title="Toggle Sound">🔊</button>
+                </div>
+            </div>
+
+            <!-- Floating Combo Text Indicator Container -->
+            <div id="combo-display" class="combo-display hidden">
+                <span id="combo-text">3x SLICE!</span>
+            </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="game-over-screen" class="overlay-screen hidden">
+            <div class="cozy-card game-over-card">
+                <h2 id="game-over-title">HARVEST COMPLETE! 🍍</h2>
+                <div class="results-grid">
+                    <div class="result-box">
+                        <span class="label">FINAL SCORE</span>
+                        <span id="final-score" class="value">0</span>
+                    </div>
+                    <div class="result-box">
+                        <span class="label">PINEAPPLES SLICED</span>
+                        <span id="final-sliced" class="value">0</span>
+                    </div>
+                    <div class="result-box">
+                        <span class="label">MAX COMBO</span>
+                        <span id="final-max-combo" class="value">0x</span>
+                    </div>
+                </div>
+
+                <div class="modal-buttons">
+                    <button id="btn-restart" class="cozy-btn btn-primary">🔄 Play Again</button>
+                    <button id="btn-main-menu" class="cozy-btn btn-secondary">🏠 Main Menu</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blade Trail Customization Modal -->
+        <div id="blade-modal" class="modal hidden">
+            <div class="modal-card cozy-card">
+                <div class="modal-header">
+                    <h3>SELECT YOUR BLADE TRAIL</h3>
+                    <button id="btn-close-blade" class="close-btn">&times;</button>
+                </div>
+
+                <div class="blade-grid">
+                    <button class="blade-option active" data-blade="sunbeam">
+                        <div class="blade-preview sunbeam-preview"></div>
+                        <span>Sunbeam Gold</span>
+                    </button>
+                    <button class="blade-option" data-blade="honey">
+                        <div class="blade-preview honey-preview"></div>
+                        <span>Honey Glow</span>
+                    </button>
+                    <button class="blade-option" data-blade="matcha">
+                        <div class="blade-preview matcha-preview"></div>
+                        <span>Matcha Sparkle</span>
+                    </button>
+                    <button class="blade-option" data-blade="rainbow">
+                        <div class="blade-preview rainbow-preview"></div>
+                        <span>Pastel Rainbow</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main JavaScript ES Modules -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
