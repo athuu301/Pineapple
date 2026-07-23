@@ -61,6 +61,27 @@ export class ParticleEngine {
         }
     }
 
+    createExplosion(x, y, count = 35) {
+        // Fireball and smoke burst
+        for (let i = 0; i < count; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const speed = Math.random() * 14 + 3;
+            const colors = ['#ff3300', '#ff6600', '#ffcc00', '#333333', '#111111'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            this.particles.push({
+                x, y,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed,
+                radius: Math.random() * 12 + 6,
+                color,
+                life: 1.0,
+                decay: Math.random() * 0.04 + 0.02,
+                gravity: 0.1,
+                type: 'explosion'
+            });
+        }
+    }
+
     addScorePopup(x, y, text, color = '#ffcf56') {
         this.scorePopups.push({
             x, y,
@@ -128,7 +149,7 @@ export class ParticleEngine {
             ctx.save();
             ctx.globalAlpha = Math.max(0, p.life);
 
-            if (p.type === 'splatter') {
+            if (p.type === 'splatter' || p.type === 'explosion') {
                 ctx.fillStyle = p.color;
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.radius * p.life, 0, Math.PI * 2);

@@ -118,12 +118,21 @@ window.addEventListener('DOMContentLoaded', () => {
     if (btnSoundToggle) btnSoundToggle.addEventListener('click', toggleAudio);
     if (btnHudSound) btnHudSound.addEventListener('click', toggleAudio);
 
-    // Pause Button
+    // Pause & Menu Buttons
     const btnPause = document.getElementById('btn-pause');
     if (btnPause) {
         btnPause.addEventListener('click', () => {
             const isPaused = game.pause();
             btnPause.textContent = isPaused ? '▶️' : '⏸️';
+        });
+    }
+
+    const btnHudMenu = document.getElementById('btn-hud-menu');
+    if (btnHudMenu) {
+        btnHudMenu.addEventListener('click', () => {
+            game.isPlaying = false;
+            clearInterval(game.timerInterval);
+            ui.showMenu();
         });
     }
 
@@ -138,6 +147,8 @@ window.addEventListener('DOMContentLoaded', () => {
     const btnMainMenu = document.getElementById('btn-main-menu');
     if (btnMainMenu) {
         btnMainMenu.addEventListener('click', () => {
+            game.isPlaying = false;
+            clearInterval(game.timerInterval);
             ui.showMenu();
         });
     }

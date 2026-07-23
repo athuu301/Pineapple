@@ -30,10 +30,13 @@ export class Game {
         this.timerInterval = null;
 
         this.spawnTimer = 0;
-        this.spawnInterval = 75; // Frames between launches
+        this.spawnInterval = 65; // Frames between launches
 
         this.comboCount = 0;
         this.comboResetTimeout = null;
+
+        this.shakeTime = 0;
+        this.shakeIntensity = 0;
 
         this.resize();
         this.bindEvents();
@@ -93,6 +96,7 @@ export class Game {
         this.fruits = [];
         this.isPlaying = true;
         this.isPaused = false;
+        this.shakeTime = 0;
 
         this.ui.updateScore(0);
         this.ui.showHUD(mode === 'timed');
@@ -131,8 +135,9 @@ export class Game {
     }
 
     spawnFruit() {
-        const types = ['classic', 'classic', 'royal', 'frosty', 'honey'];
-        const type = types[Math.floor(Math.random() * types.length)];
+        const types = ['classic', 'classic', 'royal', 'frosty', 'honey', 'watermelon', 'coconut'];
+        const isBomb = Math.random() < 0.22;
+        const type = isBomb ? 'bomb' : types[Math.floor(Math.random() * types.length)];
 
         // Launch positions from bottom of canvas
         const margin = 100;
@@ -150,6 +155,11 @@ export class Game {
         this.fruits.push(new Pineapple(x, y, vx, vy, type));
     }
 
+    triggerShake(intensity = 16, duration = 20) {
+        this.shakeIntensity = intensity;
+        this.shakeTime = duration;
+    }
+
     update() {
         if (!this.isPlaying || this.isPaused) return;
 
@@ -159,7 +169,7 @@ export class Game {
         // 2. Fruit Spawning Logic
         this.spawnTimer++;
         if (this.spawnTimer >= this.spawnInterval) {
-            const count = Math.random() < 0.3 ? 2 : 1;
+            const count = Math.random() < 0.35 ? 2 : 1;
             for (let i = 0; i < count; i++) {
                 this.spawnFruit();
             }
@@ -177,6 +187,24 @@ export class Game {
             // Check slice collision
             if (!fruit.isSliced && sliceSegments.length > 0) {
                 if (fruit.checkSlice(sliceSegments)) {
+                    if (fruit.config.isBomb) {
+                        // BOMB SLICED! Explosion trigger
+                        this.sound.playExplosionSound();
+                        this.particles.createExplosion(fruit.x, fruit.y);
+                        this.triggerShake(22, 28);
+                        this.particles.addScorePopup(fruit.x, fruit.y, '💥 BOOM!', '#ff3300');
+
+                        if (this.mode === 'timed') {
+                            this.timer = Math.max(0, this.timer - 10);
+                            this.ui.updateTimer(this.timer);
+                        }
+                        this.score = Math.max(0, this.score - 50);
+                        this.ui.updateScore(this.score);
+
+                        this.fruits.splice(i, 1);
+                        continue;
+                    }
+
                     slicedThisFrame++;
                     this.totalSliced++;
                     this.score += fruit.config.score;
@@ -210,7 +238,8 @@ export class Game {
                     if (this.comboCount > this.maxCombo) this.maxCombo = this.comboCount;
 
                     this.sound.playComboSound(this.comboCount);
-                    this.ui.showComboText(`${this.comboCount}x COZY COMBO! +${comboBonus}`);
+                    this.triggerShake(8, 10);
+                    this.ui.showComboText(`${this.comboCount}x RUGGED COMBO! +${comboBonus}`);
                     this.ui.updateScore(this.score);
                 }
                 this.comboCount = 0;
@@ -222,10 +251,21 @@ export class Game {
     }
 
     render() {
-        // Clear Background with cozy ambient gradient
+        let shakeX = 0;
+        let shakeY = 0;
+        if (this.shakeTime > 0) {
+            this.shakeTime--;
+            shakeX = (Math.random() - 0.5) * this.shakeIntensity;
+            shakeY = (Math.random() - 0.5) * this.shakeIntensity;
+        }
+
+        this.ctx.save();
+        this.ctx.translate(shakeX, shakeY);
+
+        // Clear Background with dynamic gradient
         const bgGrad = this.ctx.createLinearGradient(0, 0, 0, this.height);
-        bgGrad.addColorStop(0, '#2d1b0c');
-        bgGrad.addColorStop(1, '#4a2f18');
+        bgGrad.addColorStop(0, '#0d0e15');
+        bgGrad.addColorStop(1, '#1b1d2a');
         this.ctx.fillStyle = bgGrad;
         this.ctx.fillRect(0, 0, this.width, this.height);
 
@@ -237,5 +277,8 @@ export class Game {
 
         // Render Blade Trail
         this.blade.draw(this.ctx);
+
+        this.ctx.restore();
     }
 }
+

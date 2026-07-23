@@ -1,19 +1,20 @@
 /* ==========================================================================
-   VAIGA - COZY PINEAPPLE CUTTER DESIGN SYSTEM
+   VAIGA - RUGGED PINEAPPLE SLICER DESIGN SYSTEM
    ========================================================================== */
 
 :root {
-    --cozy-honey: #f4b942;
-    --cozy-gold: #ffcf56;
-    --cozy-terracotta: #e76f51;
-    --cozy-sage: #8ab17d;
-    --cozy-cream: #fff9ee;
-    --cozy-dark-oak: #3a2312;
-    --cozy-warm-shadow: rgba(61, 38, 18, 0.35);
-    --glass-card-bg: rgba(255, 249, 238, 0.88);
-    --glass-card-border: rgba(244, 185, 66, 0.4);
-    --font-heading: 'Fredoka', cursive, sans-serif;
-    --font-body: 'Comfortaa', cursive, sans-serif;
+    --cozy-honey: #ff9f1c;
+    --cozy-gold: #ffbf69;
+    --cozy-terracotta: #ff0054;
+    --cozy-sage: #2ec4b6;
+    --cozy-cream: #f8f9fa;
+    --cozy-dark-oak: #0d0e15;
+    --cozy-warm-shadow: rgba(0, 0, 0, 0.7);
+    --glass-card-bg: rgba(18, 20, 32, 0.92);
+    --glass-card-border: rgba(255, 159, 28, 0.6);
+    --font-heading: 'Bebas Neue', cursive, sans-serif;
+    --font-accent: 'Permanent Marker', cursive, sans-serif;
+    --font-body: 'Rajdhani', sans-serif;
 }
 
 * {
@@ -33,7 +34,7 @@ body, html {
     touch-action: none;
     background-color: var(--cozy-dark-oak);
     font-family: var(--font-body);
-    color: var(--cozy-dark-oak);
+    color: var(--cozy-cream);
 }
 
 /* Game Canvas Container */
@@ -74,9 +75,9 @@ body, html {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(45, 27, 12, 0.45);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(10, 12, 20, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     pointer-events: auto;
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
@@ -91,9 +92,9 @@ body, html {
 .cozy-card {
     background: var(--glass-card-bg);
     border: 3px solid var(--glass-card-border);
-    border-radius: 32px;
+    border-radius: 28px;
     padding: 36px 32px;
-    box-shadow: 0 16px 40px var(--cozy-warm-shadow), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+    box-shadow: 0 16px 40px var(--cozy-warm-shadow), inset 0 1px 2px rgba(255, 255, 255, 0.15);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -101,6 +102,7 @@ body, html {
     width: 90%;
     max-width: 440px;
     text-align: center;
+    color: var(--cozy-cream);
     animation: floatIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -118,7 +120,7 @@ body, html {
 
 .tropical-icon {
     font-size: 3.8rem;
-    filter: drop-shadow(0 6px 12px rgba(244, 185, 66, 0.5));
+    filter: drop-shadow(0 6px 12px rgba(255, 159, 28, 0.6));
     animation: gentleBounce 2.5s infinite ease-in-out;
 }
 
@@ -129,20 +131,21 @@ body, html {
 
 .brand-title h1 {
     font-family: var(--font-heading);
-    font-size: 3.2rem;
+    font-size: 3.6rem;
     font-weight: 700;
-    letter-spacing: 3px;
-    color: var(--cozy-terracotta);
-    text-shadow: 0 2px 0 #ffffff, 0 4px 10px rgba(231, 111, 81, 0.3);
+    letter-spacing: 4px;
+    color: var(--cozy-honey);
+    text-shadow: 0 0 12px rgba(255, 159, 28, 0.5), 0 0 24px rgba(255, 0, 84, 0.3);
     margin-top: -6px;
+    line-height: 1;
 }
 
 .brand-title .tagline {
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 2.5px;
+    font-family: var(--font-accent);
+    font-size: 0.95rem;
+    letter-spacing: 2px;
     color: var(--cozy-sage);
-    margin-top: 2px;
+    margin-top: 4px;
 }
 
 /* Buttons */
@@ -157,19 +160,19 @@ body, html {
     font-family: var(--font-heading);
     font-weight: 700;
     border: none;
-    border-radius: 24px;
+    border-radius: 20px;
     padding: 16px 20px;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 14px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
     transition: transform 0.12s ease, box-shadow 0.15s ease, filter 0.15s ease;
 }
 
 .cozy-btn:hover {
     transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.4);
 }
 
 .cozy-btn:active {
@@ -200,14 +203,16 @@ body, html {
 }
 
 .btn-text .title {
-    font-size: 1.15rem;
-    letter-spacing: 0.5px;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    line-height: 1;
 }
 
 .btn-text .desc {
-    font-size: 0.75rem;
-    opacity: 0.85;
+    font-size: 0.85rem;
+    opacity: 0.9;
     font-family: var(--font-body);
+    font-weight: 700;
 }
 
 .menu-bottom-row {
@@ -219,9 +224,11 @@ body, html {
 
 .btn-small {
     padding: 10px 18px;
-    font-size: 0.9rem;
-    background: rgba(255, 255, 255, 0.7);
-    color: var(--cozy-dark-oak);
+    font-size: 1.1rem;
+    font-family: var(--font-heading);
+    letter-spacing: 1px;
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--cozy-cream);
     border: 2px solid var(--cozy-honey);
     border-radius: 18px;
 }
@@ -237,10 +244,10 @@ body, html {
 
 .high-score-badge {
     font-family: var(--font-heading);
-    font-size: 0.95rem;
-    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
     color: var(--cozy-sage);
-    background: rgba(138, 177, 125, 0.18);
+    background: rgba(46, 196, 182, 0.18);
     padding: 8px 18px;
     border-radius: 16px;
     border: 1px dashed var(--cozy-sage);
@@ -275,8 +282,8 @@ body, html {
 .score-card, .timer-card {
     background: var(--glass-card-bg);
     border: 2px solid var(--cozy-honey);
-    border-radius: 20px;
-    padding: 8px 20px;
+    border-radius: 18px;
+    padding: 6px 18px;
     box-shadow: 0 6px 16px var(--cozy-warm-shadow);
     display: flex;
     flex-direction: column;
@@ -285,16 +292,17 @@ body, html {
 
 .score-label, .timer-label {
     font-family: var(--font-heading);
-    font-size: 0.65rem;
+    font-size: 0.9rem;
     letter-spacing: 1.5px;
-    color: var(--cozy-terracotta);
+    color: var(--cozy-gold);
 }
 
 .score-value, .timer-value {
     font-family: var(--font-heading);
-    font-size: 1.6rem;
+    font-size: 2.2rem;
     font-weight: 700;
-    color: var(--cozy-dark-oak);
+    color: #ffffff;
+    line-height: 1;
 }
 
 .hud-actions {
@@ -309,6 +317,7 @@ body, html {
     width: 44px;
     height: 44px;
     font-size: 1.2rem;
+    color: #ffffff;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -333,11 +342,11 @@ body, html {
 
 .combo-display span {
     font-family: var(--font-heading);
-    font-size: 2.8rem;
+    font-size: 3.4rem;
     font-weight: 700;
     color: var(--cozy-gold);
-    text-shadow: 0 4px 12px rgba(231, 111, 81, 0.6), 0 0 20px #ffffff;
-    letter-spacing: 2px;
+    text-shadow: 0 4px 14px rgba(255, 0, 84, 0.8), 0 0 20px #ffffff;
+    letter-spacing: 3px;
 }
 
 @keyframes comboPop {
@@ -359,7 +368,7 @@ body, html {
 }
 
 .result-box {
-    background: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.08);
     border: 2px solid var(--cozy-honey);
     border-radius: 18px;
     padding: 12px 8px;
@@ -369,17 +378,19 @@ body, html {
 }
 
 .result-box .label {
-    font-size: 0.65rem;
+    font-size: 0.85rem;
     font-family: var(--font-heading);
-    color: var(--cozy-terracotta);
+    letter-spacing: 1px;
+    color: var(--cozy-gold);
 }
 
 .result-box .value {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     font-family: var(--font-heading);
     font-weight: 700;
-    color: var(--cozy-dark-oak);
-    margin-top: 4px;
+    color: #ffffff;
+    margin-top: 2px;
+    line-height: 1;
 }
 
 .modal-buttons {
@@ -400,7 +411,7 @@ body, html {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(45, 27, 12, 0.5);
+    background: rgba(10, 12, 20, 0.7);
     backdrop-filter: blur(8px);
     z-index: 100;
     display: flex;
@@ -422,15 +433,16 @@ body, html {
 
 .modal-header h3 {
     font-family: var(--font-heading);
-    font-size: 1.15rem;
-    color: var(--cozy-terracotta);
+    font-size: 1.8rem;
+    letter-spacing: 1.5px;
+    color: var(--cozy-honey);
 }
 
 .close-btn {
     background: none;
     border: none;
-    font-size: 1.8rem;
-    color: var(--cozy-dark-oak);
+    font-size: 2rem;
+    color: var(--cozy-cream);
     cursor: pointer;
 }
 
@@ -442,7 +454,7 @@ body, html {
 }
 
 .blade-option {
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.08);
     border: 2px solid var(--glass-card-border);
     border-radius: 20px;
     padding: 14px;
@@ -456,8 +468,8 @@ body, html {
 
 .blade-option.active, .blade-option:hover {
     border-color: var(--cozy-honey);
-    background: #ffffff;
-    box-shadow: 0 6px 16px rgba(244, 185, 66, 0.4);
+    background: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 6px 16px rgba(255, 159, 28, 0.4);
     transform: scale(1.03);
 }
 
@@ -474,8 +486,9 @@ body, html {
 
 .blade-option span {
     font-family: var(--font-heading);
-    font-size: 0.8rem;
-    color: var(--cozy-dark-oak);
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    color: var(--cozy-cream);
 }
 
 /* Responsive Media Queries */
